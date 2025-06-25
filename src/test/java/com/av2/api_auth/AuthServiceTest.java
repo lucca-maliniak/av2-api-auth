@@ -1,4 +1,4 @@
-package com.av2.api_auth.service.tests;
+package com.av2.api_auth;
 
 import com.av2.api_auth.dto.AuthRequest;
 import com.av2.api_auth.dto.AuthResponse;
@@ -54,7 +54,7 @@ public class AuthServiceTest {
   @BeforeEach
   void setUp() {
     registerRequest = new RegisterRequestDTO("testuser",  "password", "Test User", "test@example.com");
-    authRequest = new AuthRequest("test@example.com", "password");
+    authRequest = new AuthRequest("test", "password", "test@example.com");
     
     user = User.builder()
       .id(1L)
@@ -71,7 +71,7 @@ public class AuthServiceTest {
     when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
     when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
     when(userRepository.save(any(User.class))).thenReturn(user);
-    when(jwtService.generateToken(any(User.class))).thenReturn("jwtToken");
+    when(jwtService.generateToken(any(Authentication.class))).thenReturn("jwtToken");
 
     // Act
     AuthResponse response = authService.register(registerRequest);
@@ -103,7 +103,7 @@ public class AuthServiceTest {
     // Arrange
     when(authenticationManager.authenticate(any(UsernamePasswordAuthenticationToken.class))).thenReturn(authentication);
     when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
-    when(jwtService.generateToken(any(User.class))).thenReturn("jwtToken");
+    when(jwtService.generateToken(any(Authentication.class))).thenReturn("jwtToken");
 
     // Act
     AuthResponse response = authService.authenticate(authRequest);

@@ -16,4 +16,7 @@ public class AuthRequest {
   
   @NotBlank(message = "Password é obrigatório")
   private String password;
+
+  @NotBlank(message = "Email é obrigatório")
+  private String email;
 }

@@ -10,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,9 @@ public class AuthService {
       throw new RuntimeException("Credenciais inválidas", e);
     }
   }
-
+  
   public AuthResponse register(RegisterRequestDTO request) {
+
     if (userRepository.existsByUsername(request.getUsername())) {
       throw new RuntimeException("Username já está em uso");
     }
@@ -78,6 +80,24 @@ public class AuthService {
     
     return AuthResponse.builder()
       .token(token)
+      .username(user.getUsername())
+      .role(user.getRole().name())
+      .build();
+  }
+  
+  public AuthResponse authenticate(AuthRequest request) {
+    Authentication authentication = authenticationManager.authenticate(
+      new UsernamePasswordAuthenticationToken(request.getEmail(), request.getPassword())
+    );
+
+    User user = userRepository.findByEmail(request.getEmail())
+      .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+    String token = jwtService.generateToken(authentication);
+
+    return AuthResponse.builder()
+      .token(token)
+      .email(user.getEmail())
       .username(user.getUsername())
       .role(user.getRole().name())
       .build();

@@ -1,9 +1,11 @@
-package com.av2.api_auth.service.tests;
+package com.av2.api_auth;
 
 import com.av2.api_auth.dto.ProductDTO;
 import com.av2.api_auth.model.Product;
 import com.av2.api_auth.exception.ResourceNotFoundException;
 import com.av2.api_auth.repository.ProductRepository;
+import com.av2.api_auth.service.ProductService;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

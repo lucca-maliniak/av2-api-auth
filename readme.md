@@ -16,23 +16,7 @@
 - Autorização baseada em roles (ROLE_USER, ROLE_ADMIN)
 - Endpoints CRUD protegidos
 - Documentação automática da API
-- Monitoramento em tempo real
-
-# Estrutura do Projeto
-src/
-├── main/
-│   ├── java/com/auth/api/
-│   │   ├── config/        # Configurações (Security, OpenAPI, Actuator)
-│   │   ├── controller/    # Controladores REST
-│   │   ├── dto/           # Objetos de transferência de dados
-│   │   ├── entity/        # Entidades JPA
-│   │   ├── exception/     # Tratamento de exceções
-│   │   ├── repository/    # Repositórios JPA
-│   │   ├── security/      # Configuração JWT e segurança
-│   │   └── service/       # Lógica de negócios
-│   └── resources/
-│       └── application.yml
-└── test/                  # Testes unitários
+- Monitoramento em tempo real              
 
 # Instalação e Execução
 - Pré-requisitos
@@ -41,13 +25,13 @@ Maven
 Docker & Docker Compose (para monitoramento)
 
 # Compilar o projeto
-mvn clean install
+`mvn clean install`
 
 # Executar a aplicação
-mvn spring-boot:run
+`mvn spring-boot:run`
 
 # Iniciar Prometheus e Grafana
-docker-compose up -d
+`docker-compose up -d`
 
 # Endpoints Principais
 - POST /auth/register - Registro de usuários
@@ -57,21 +41,22 @@ docker-compose up -d
 - POST /api/products - Criar produto (apenas ADMIN)
 
 # Documentação
-Acesse a documentação Swagger em: http://localhost:8080/swagger-ui.html
+Acesse a documentação Swagger em: 
+- http://localhost:8080/swagger-ui.html
 
 # Monitoramento
 Métricas: http://localhost:8080/actuator/prometheus
 Grafana: http://localhost:3000 (admin/admin)
 
 # Executar testes unitários
-mvn test
+`mvn test`
 
 # Testes de carga com JMeter
 - Importar o arquivo AuthAPILoadTest.jmx no JMeter
 
 # Docker
 - Construir imagem
-docker build -t auth-api .
+`docker build -t auth-api .`
 
 - Executar container
-docker run -p 8080:8080 auth-api
+`docker run -p 8080:8080 auth-api`

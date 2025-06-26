@@ -24,14 +24,9 @@ Java 17+
 Maven
 Docker & Docker Compose (para monitoramento)
 
-# Compilar o projeto
-`mvn clean install`
-
-# Executar a aplicação
-`mvn spring-boot:run`
-
-# Iniciar Prometheus e Grafana
-`docker-compose up -d`
+# Railway
+- URL do projeto hospedado <br>
+`https://railway.com/project/b108bac1-df68-4054-9a3a-9a8614d63532?environmentId=0e2b4096-0752-439d-ae51-a497f9fc1f00`
 
 # Endpoints Principais
 - POST /auth/register - Registro de usuários

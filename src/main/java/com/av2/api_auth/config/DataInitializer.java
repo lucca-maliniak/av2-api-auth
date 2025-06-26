@@ -30,6 +30,7 @@ public class DataInitializer {
           .username("Admin User")
           .email("admin@example.com")
           .password(passwordEncoder.encode("admin123"))
+          .fullName("Administrador")
           .role(Role.ADMIN)
           .build();
 
@@ -37,6 +38,7 @@ public class DataInitializer {
           .username("Regular User")
           .email("user@example.com")
           .password(passwordEncoder.encode("user123"))
+          .fullName("Administrador")
           .role(Role.USER)
           .build();
 

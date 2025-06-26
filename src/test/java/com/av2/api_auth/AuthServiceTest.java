@@ -60,6 +60,7 @@ public class AuthServiceTest {
       .id(1L)
       .username("Test User")
       .email("test@example.com")
+      .fullName("Test User")
       .password("encodedPassword")
       .role(Role.USER)
       .build();

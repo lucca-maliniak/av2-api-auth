@@ -12,17 +12,51 @@ spring:
     show-sql: true
     properties:
       hibernate:
-      format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
-  # JWT Configuration
+        format_sql: true
+    h2:
+      console:
+        enabled: true
+        path: /h2-console
   jwt:
-    secret: 5367566B59703373367639792F423F4528482B4D6251655468576D5A71347437
+    public-key: |
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAoG30+bF7B0vcxplN4vC8
+      hnfRPTaUnZ7opfuLT4PTMiJjD8TRGkp5sObXYReUrs/D+LCoefXuc9pGI6aGgZ8V
+      M6JofkML8pqRxdZELw0MEbEQJFr0pB/pK6wpkteS444x3SZfFR3E81t45xrT3WhI
+      Dn7XoWWq/kEVQ3c84wz7OmNOZPy29j1p5v1CmZBM6oX+irhn6dD82GecnlulLv5k
+      G6M+09Szp/RYAeaWeKI9boieeqcMq26m1gFtMQKZAAI6Z/TJL4VVDICgdyCSmfbx
+      wPpBC6fHp3or+jkjXC/AdeLJID7fxqWlRKCJ3UAP1fR/yXtFXr6LxZwmvsLaUZg1
+      ywIDAQAB
+      -----END PUBLIC KEY-----
+    private-key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEogIBAAKCAQEAoG30+bF7B0vcxplN4vC8hnfRPTaUnZ7opfuLT4PTMiJjD8TR
+      Gkp5sObXYReUrs/D+LCoefXuc9pGI6aGgZ8VM6JofkML8pqRxdZELw0MEbEQJFr0
+      pB/pK6wpkteS444x3SZfFR3E81t45xrT3WhIDn7XoWWq/kEVQ3c84wz7OmNOZPy2
+      9j1p5v1CmZBM6oX+irhn6dD82GecnlulLv5kG6M+09Szp/RYAeaWeKI9boieeqcM
+      q26m1gFtMQKZAAI6Z/TJL4VVDICgdyCSmfbxwPpBC6fHp3or+jkjXC/AdeLJID7f
+      xqWlRKCJ3UAP1fR/yXtFXr6LxZwmvsLaUZg1ywIDAQABAoIBAFJUu7DcvVecPhwJ
+      lugNRaL4oH/6n8BYSerMsczHyT3kWdRA3FLSv6rifMvODza7V0YsWvnkFVCNRwuK
+      rWKeIoJSKbAKdno1ivPtpyZCWtxFcxRFPWFxIvePrfI3AaIYWky1IXyzv1xoqB5q
+      LSpmFvyhacXhaCR9gA0Uh0G6ar+mXYCPQdS49SMTdfQZBCnsYZx3V97A2gaBvkbF
+      VJVhwMB1mpiu6n0RdrQw0m+24NnOfC2vI5A9NPyPKeseunEuTnpGT8gMCnLUl5rw
+      tnxvkZ7KObx4tILeM/jJlDJF4gSOFE4S0SCfmyxESYXKoyAJp4m9fVdH1j5HdDdT
+      pd4PZwECgYEA8+968FMc3MdVpbKf6VnxTwo+Cy6fkxwBM5YzMb4d44kVDpdb/lLv
+      MmzYgL24N6hn3fL3CuUPbBkKZ6EASAjsN9TIXbxBegf0W8OHovIqRAmDqJKCYUkn
+      pZN05X+x3Cj8uGcDFRpEiHGfNnKJiBm79EPhZ6ZqzVLCj7nEoqhN/YECgYEAqF0w
+      loJoF++FsBoS4+ODKN6aX7q9Cpieq0dxkKQfhHXbaj3n/Pred26exLs3WhEfSHyU
+      b5lxUBUwhBKDG36cp1xq30uvrWMqxLduZE8tdZQdxaxM0/Sbf5Tfj0iNemO/deNH
+      abyULC2A1iUegzV1rUDcWE5faJLxUawRbXRZcUsCgYAJ5ppyzqzJOT38r7dV3VSy
+      BJRoF8haTDSwR1RknHbSGWpFYVdWhz82KLzQ3OJxP+CXXZkxVALAPHPzqNE+Gz6b
+      NYO8ajuuHEyKvPDwaCvW/xvc57VrBXEag1WnSvuJGBDJ20SAwsQtVY9EwnlakNDU
+      JT0s29BR7R4Af2W/xF0GAQKBgHoQJhvYq9M+qnQEU1G5LuxAhzeEUW4PPGn9QA6X
+      juof8FXUUA8Pap64Ko+DFBxOcZnCCHPokUh4NFZsfXU/lB+aVzlQzCsuzGEWhAhh
+      hxnJqtQXmRPKMbqLmpFtDnV/P94eSzYTrHFjBBc9jiOebJSRg67aEz3j2uVVlMUA
+      J6CFAoGAav/dHClPj1NVUJ7z/PKVSKYWCSL/tUbIKfL080GnerQjfCXh762Rrj0H
+      J/SmOJ7s+nY4r0dXBboaJ16dUlKPN+W5w0zM2YQL3vjt7HdEopM306TN2X4VKTcC
+      6IfECnnVMoBQ1VrmK5cXPv0CUq6Di9rTeGU0iS7z9iDvhR0vi1c=
+      -----END RSA PRIVATE KEY-----
     expiration: 86400000 # 24 hours in milliseconds
-
 # Actuator Configuration
 management:
   endpoints:

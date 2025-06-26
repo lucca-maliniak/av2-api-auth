@@ -53,8 +53,8 @@ public class AuthServiceTest {
 
   @BeforeEach
   void setUp() {
-    registerRequest = new RegisterRequestDTO("testuser",  "password", "Test User", "test@example.com");
-    authRequest = new AuthRequest("test", "password", "test@example.com");
+    registerRequest = new RegisterRequestDTO("Test User",  "password", "Test User", "test@example.com");
+    authRequest = new AuthRequest("Test User", "password", "test@example.com");
     
     user = User.builder()
       .id(1L)
@@ -67,35 +67,37 @@ public class AuthServiceTest {
 
   @Test
   void testRegister_Success() {
-    // Arrange
-    when(userRepository.findByEmail(anyString())).thenReturn(Optional.empty());
-    when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
-    when(userRepository.save(any(User.class))).thenReturn(user);
-    when(jwtService.generateToken(any(Authentication.class))).thenReturn("jwtToken");
+      // Arrange
+      when(userRepository.existsByUsername(anyString())).thenReturn(false);
+      when(userRepository.existsByEmail(anyString())).thenReturn(false);
+      when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
+      when(userRepository.save(any(User.class))).thenReturn(user);
+      when(jwtService.generateToken(any())).thenReturn("jwtToken");
 
-    // Act
-    AuthResponse response = authService.register(registerRequest);
+      // Act
+      AuthResponse response = authService.register(registerRequest);
 
-    // Assert
-    assertNotNull(response);
-    assertEquals("jwtToken", response.getToken());
-    assertEquals("test@example.com", response.getEmail());
-    assertEquals("Test User", response.getUsername());
-    assertEquals("ROLE_USER", response.getRole());
-    verify(userRepository, times(1)).save(any(User.class));
+      // Assert
+      assertNotNull(response);
+      assertEquals("jwtToken", response.getToken());
+      assertEquals("test@example.com", response.getEmail());
+      assertEquals("Test User", response.getUsername());
+      assertEquals("USER", response.getRole());
+      verify(userRepository, times(1)).save(any(User.class));
   }
 
   @Test
   void testRegister_UserAlreadyExists() {
-    // Arrange
-    when(userRepository.findByEmail(anyString())).thenReturn(Optional.of(user));
+      // Arrange
+      when(userRepository.existsByUsername(anyString())).thenReturn(false);
+      when(userRepository.existsByEmail(anyString())).thenReturn(true);
 
-    // Act & Assert
-    assertThrows(RuntimeException.class, () -> {
-      authService.register(registerRequest);
-    });
-    
-    verify(userRepository, never()).save(any(User.class));
+      // Act & Assert
+      assertThrows(RuntimeException.class, () -> {
+        authService.register(registerRequest);
+      });
+
+      verify(userRepository, never()).save(any(User.class));
   }
 
   @Test
@@ -113,7 +115,7 @@ public class AuthServiceTest {
     assertEquals("jwtToken", response.getToken());
     assertEquals("test@example.com", response.getEmail());
     assertEquals("Test User", response.getUsername());
-    assertEquals("ROLE_USER", response.getRole());
+    assertEquals("USER", response.getRole());
     verify(authenticationManager, times(1)).authenticate(any(UsernamePasswordAuthenticationToken.class));
   }
 
